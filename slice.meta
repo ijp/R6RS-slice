@@ -1,0 +1,8 @@
+;;; slice.meta -*- scheme -*-
+
+((egg "slice.egg")
+ (synopsis "A slicer procedure for lists, strings and vectors")
+ (author "Mario Domenech Goulart")
+ (license "BSD")
+ (category data)
+ (test-depends test))

@@ -1,0 +1,9 @@
+;;; slice.setup -*- scheme -*-
+
+(compile -s -O2 -d1 -j slice slice.scm)
+(compile -s -O2 -d1 slice.import.scm)
+
+(install-extension 'slice
+                   '("slice.so" "slice.import.so")
+                   '((version "1.0")))
+
