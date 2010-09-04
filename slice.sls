@@ -89,6 +89,15 @@
           sub))
       (generic-slicer v from to vector-length '#() subvector))
 
+    (define (bytevector-slice bv from to)
+      (define (subbytevector bv start end)  
+        (let ((len (bytevector-length bv)))
+          (let* ((difference (- end start))
+                 (new-bv (make-bytevector difference)))
+            (bytevector-copy! bv start new-bv 0 difference)
+            new-bv)))
+      (generic-slicer bv from to bytevector-length #vu8() subbytevector))
+
 
     (let ((slicers
            (list (lambda (obj)
@@ -99,7 +108,10 @@
                         vector-slice))
                  (lambda (obj)
                    (and (list? obj)
-                        list-slice)))))
+                        list-slice))
+                 (lambda (obj)
+                   (and (bytevector? obj)
+                        bytevector-slice)))))
       (define (inner obj from to)
         (if (procedure? obj)
             (set! slicers (cons obj slicers))

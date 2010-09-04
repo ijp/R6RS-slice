@@ -90,6 +90,34 @@
 (test-equal '#(1 2 3) (slice v -10 -4))
 
 ;;;
+;;; Bytevectors
+;;;
+(define bv #vu8(1 2 3 4 5 6 7))
+
+(newline)
+(display "bv = ")
+(pp bv)
+
+(test-equal #vu8() (slice bv 0 0))
+(test-equal #vu8() (slice bv 1 0))
+(test-equal #vu8(1) (slice bv 0 1))
+(test-equal #vu8(2 3) (slice bv 1 3))
+(test-equal #vu8() (slice bv 10 10))
+(test-equal #vu8(1 2 3 4 5 6 7) (slice bv 0 10))
+(test-equal #vu8() (slice bv 10 0))
+
+(test-equal #vu8(1 2 3 4 5 6 7) (slice bv 0))
+(test-equal #vu8(7) (slice bv -1))
+(test-equal #vu8() (slice bv 10))
+(test-equal #vu8(1 2 3 4 5 6 7) (slice bv -10))
+(test-equal #vu8(4 5 6 7) (slice bv -4))
+
+(test-equal #vu8() (slice bv -4 -4))
+(test-equal #vu8(4 5) (slice bv -4 -2))
+(test-equal #vu8() (slice bv -4 -10))
+(test-equal #vu8(1 2 3) (slice bv -10 -4))
+
+;;;
 ;;; Custom object
 ;;;
 (define-record-type custom-string (fields text))
