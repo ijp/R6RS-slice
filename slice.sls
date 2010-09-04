@@ -1,3 +1,4 @@
+#!r6rs
 (library (slice)
 (export slice)
 (import (rnrs) (only (srfi :1) take drop))
